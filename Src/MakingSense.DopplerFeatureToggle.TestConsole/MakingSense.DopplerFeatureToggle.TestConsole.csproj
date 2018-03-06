@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
+    <RootNamespace>MakingSense.DopplerFeatureToggle.TestConsole</RootNamespace>
+    <AssemblyName>MakingSense.DopplerFeatureToggle.TestConsole</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="BenchmarkDotNet.Artifacts\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MakingSense.DopplerFeatureToggle.Tests\MakingSense.DopplerFeatureToggle.Tests.csproj" />
+  </ItemGroup>
+</Project>

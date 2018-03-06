@@ -1,0 +1,1 @@
+Simple Feature Toggle client for .NET.
