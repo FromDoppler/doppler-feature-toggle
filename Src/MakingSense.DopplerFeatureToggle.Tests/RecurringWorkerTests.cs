@@ -52,15 +52,15 @@ namespace MakingSense.DopplerFeatureToggle
             var counter = 0;
             var due = TimeSpan.FromMilliseconds(600);
             var period = TimeSpan.FromMilliseconds(150);
-            var testTime = TimeSpan.FromMilliseconds(1800);
+            var testTime = TimeSpan.FromMilliseconds(1900);
             var expectedCount = 9;
             var tolerance = 4;
 
-            Func<Task> testAction = () =>
+            Task testAction()
             {
                 counter++;
                 return TaskUtilities.CompletedTask;
-            };
+            }
 
             using (var sut = new RecurringWorker(testAction, due, period))
             {
