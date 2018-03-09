@@ -56,11 +56,11 @@ namespace MakingSense.DopplerFeatureToggle
             var expectedCount = 9;
             var tolerance = 4;
 
-            Func<Task> testAction = () =>
+            Task testAction()
             {
                 counter++;
                 return TaskUtilities.CompletedTask;
-            };
+            }
 
             using (var sut = new RecurringWorker(testAction, due, period))
             {
