@@ -44,9 +44,28 @@ namespace MakingSense.DopplerFeatureToggle
     /// </remarks>
     public class RecurringWorker : IDisposable
     {
+        /// <summary>
+        /// Delay before start the recurring task
+        /// </summary>
+        public TimeSpan DueTime { get; }
+
+        /// <summary>
+        /// Delay between recurring task executions
+        /// </summary>
+        public TimeSpan Period { get; }
+
+        /// <summary>
+        /// True when the task is being executed and False when it is waiting
+        /// </summary>
+        public bool WorkInProgress { get; private set; } = false;
+
+        /// <summary>
+        /// True when the timer is on and False when the timer is stop.
+        /// </summary>
+        public bool Running => _timer != null;
+
         private readonly Func<Task> _action;
-        private readonly Timer _timer;
-        private bool _inProgress = false;
+        private Timer _timer;
 
         /// <summary>
         /// Event raised when action execution ends with an exception
@@ -67,18 +86,48 @@ namespace MakingSense.DopplerFeatureToggle
         public RecurringWorker(Func<Task> action, TimeSpan dueTime, TimeSpan period)
         {
             _action = action;
-            _timer = new Timer(async _ => await RunAction(), null, dueTime, period);
+            DueTime = dueTime;
+            Period = period;
         }
 
         /// <inheritdoc />
-        public void Dispose()
+        public void Dispose() => Stop();
+
+        /// <summary>
+        /// Start the recurring execution of the action
+        /// </summary>
+        /// <remarks>
+        /// If the recurring execution is already started, it does not do anything.
+        /// </remarks>
+        public void Start()
         {
-            _timer.Dispose();
+            // Consider a lock or interlock to avoid race conditions with near calls to Start and Stop (weird scenarios)
+            if (_timer == null)
+            {
+                _timer = new Timer(async _ => await RunAction(), null, DueTime, Period);
+            }
+        }
+
+        /// <summary>
+        /// Stop the recurring execution of the action
+        /// </summary>
+        /// <remarks>
+        /// If the recurring execution is already stop, it does not do anything.
+        /// </remarks>
+        public void Stop()
+        {
+            // Consider a lock or interlock to avoid race conditions with near calls to Start and Stop (weird scenarios)
+            var timer = _timer;
+            _timer = null;
+            if (timer != null)
+            {
+                timer.Dispose();
+            }
         }
 
         private async Task RunAction()
         {
-            if (_inProgress)
+            if (WorkInProgress)
             {
                 ExecutionOmitted?.Invoke(this, new EventArgs());
                 return;
@@ -86,7 +135,7 @@ namespace MakingSense.DopplerFeatureToggle
 
             try
             {
-                _inProgress = true;
+                WorkInProgress = true;
                 await _action();
             }
             catch (Exception e)
@@ -95,7 +144,7 @@ namespace MakingSense.DopplerFeatureToggle
             }
             finally
             {
-                _inProgress = false;
+                WorkInProgress = false;
             }
         }
     }
