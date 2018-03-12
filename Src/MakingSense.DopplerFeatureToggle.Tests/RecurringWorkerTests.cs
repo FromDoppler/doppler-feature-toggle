@@ -50,11 +50,11 @@ namespace MakingSense.DopplerFeatureToggle
         {
             // Arrange
             var counter = 0;
-            var delayBeforeStart = TimeSpan.FromMilliseconds(200);
-            var delayAfterEnd = TimeSpan.FromMilliseconds(200);
-            var due = TimeSpan.FromMilliseconds(600);
-            var period = TimeSpan.FromMilliseconds(150);
-            var workingTime = TimeSpan.FromMilliseconds(1900);
+            var delayBeforeStart = TimeSpan.FromMilliseconds(400);
+            var delayAfterEnd = TimeSpan.FromMilliseconds(400);
+            var due = TimeSpan.FromMilliseconds(1200);
+            var period = TimeSpan.FromMilliseconds(300);
+            var workingTime = TimeSpan.FromMilliseconds(3800);
             var expectedCount = 9;
             var tolerance = 3;
 
@@ -66,6 +66,7 @@ namespace MakingSense.DopplerFeatureToggle
 
             using (var sut = new RecurringWorker(testAction, due, period))
             {
+                sut.ExecutionOmitted += (o, e) => counter++;
                 Delay(delayBeforeStart);
                 sut.Start();
                 Assert.AreEqual(0, counter);
