@@ -29,8 +29,7 @@ using System.Linq;
 using System.Text;
 using MakingSense.DopplerFeatureToggle.Tests;
 using System.Threading.Tasks;
-using System.Text.RegularExpressions;
-using System.Threading;
+using MakingSense.DopplerFeatureToggle.Internal;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -46,30 +45,38 @@ namespace MakingSense.DopplerFeatureToggle
     {
 
         [Test]
-        public void RecurringWorker_should_execute_tasks_periodically()
+        public void UpdatePeriodically_should_create_an_already_started_RecurringWorker_to_call_updater()
         {
             // Arrange
             var updater = new UpdaterDouble();
 
-            var due = TimeSpan.FromMilliseconds(600);
-            var period = TimeSpan.FromMilliseconds(150);
-            var testTime = TimeSpan.FromMilliseconds(1800);
-            var expectedCount = 9;
-            var tolerance = 4;
-
+            var due = TimeSpan.FromMilliseconds(200);
+            var period = TimeSpan.FromMilliseconds(1000);
+            var testTime = TimeSpan.FromMilliseconds(300);
 
             // Act
-            updater.UpdatePeriodically(due, period);
-            Assert.AreEqual(0, updater.UpdateCount);
-            Delay(testTime);
+            var worker = updater.UpdatePeriodically(due, period);
 
             // Assert
-#if (DNXCORE50)
-            Assert.InRange(updater.UpdateCount, expectedCount - tolerance, expectedCount + tolerance);
-#else
-            Assert.GreaterOrEqual(updater.UpdateCount, expectedCount - tolerance);
-            Assert.LessOrEqual(updater.UpdateCount, expectedCount + tolerance);
-#endif
+            Assert.IsNotNull(worker);
+            Assert.AreEqual(period, worker.Period);
+            Assert.AreEqual(due, worker.DueTime);
+            Assert.IsTrue(worker.Running);
+            Assert.IsFalse(worker.WorkInProgress);
+            Assert.AreEqual(0, updater.UpdateCount);
+
+            Delay(testTime);
+            Assert.AreEqual(1, updater.UpdateCount);
+
+            // Act
+            worker.Dispose();
+
+            // Assert
+            Assert.IsNotNull(worker);
+            Assert.AreEqual(period, worker.Period);
+            Assert.AreEqual(due, worker.DueTime);
+            Assert.IsFalse(worker.Running);
+            Assert.IsFalse(worker.WorkInProgress);
         }
     }
 
@@ -77,9 +84,10 @@ namespace MakingSense.DopplerFeatureToggle
     {
         public int UpdateCount { get; private set; }
 
-        public async Task UpdateAsync()
+        public Task UpdateAsync()
         {
             UpdateCount++;
+            return TaskUtilities.CompletedTask;
         }
     }
 }
