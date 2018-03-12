@@ -64,6 +64,7 @@ namespace MakingSense.DopplerFeatureToggle
 
             using (var sut = new RecurringWorker(testAction, due, period))
             {
+                sut.Start();
                 Assert.AreEqual(0, counter);
 
                 // Act
