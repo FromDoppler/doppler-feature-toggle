@@ -1,0 +1,25 @@
+{
+    "features": [
+        {
+            "name": "Example1Feature1",
+            "treatments": [
+                { "name": "Example1Treatment1A", "includedDifferentiators": [ "Example1A", "Example1B", "Example1C" ] },
+                { "name": "Example1Treatment1B", "includedDifferentiators": [ "Example1D", "Example1E", "Example1F"] }
+            ]
+        },
+        {
+            "name": "Example1Feature2",
+            "treatments": [
+                { "name": "Example1Treatment2A", "includedDifferentiators": [ "Example1G", "Example1H", "Example1I"] },
+                { "name": "Example1Treatment2B", "includedDifferentiators": [ ] }
+            ]
+        },
+        {
+            "name": "Example1Feature3",
+            "treatments": [
+                { "name": "Enabled", "includedDifferentiators": [ ] },
+                { "name": "Disabled", "includedDifferentiators": [ "Example1J", "Example1K", "Example1L", "Example1M" ] }
+            ]
+        }
+    ]
+}
