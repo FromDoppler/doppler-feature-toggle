@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MakingSense.DopplerFeatureToggle
 {
+    /// <summary>
+    /// Helper methods for IUpdater
+    /// </summary>
     public static class UpdaterExtensions
     {
         /// <summary>
