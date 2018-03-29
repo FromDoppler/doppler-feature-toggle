@@ -29,7 +29,7 @@
             ]
         },
         {
-            "name": "DateBehavior"",
+            "name": "DateBehavior",
             "treatments": [
                 { "name": "ISO", "includedDifferentiators": [ "Andres" ] },
                 { "name": "English", "includedDifferentiators": [ "Cristian" ] },
