@@ -109,7 +109,7 @@ namespace MakingSense.DopplerFeatureToggle.Tests
         const string OnlineExample1 = "https://raw.githubusercontent.com/MakingSense/doppler-feature-toggle/resources/example1.json";
 
         [Test]
-        public async Task HttpFeatureToggleClient_should_update_rules_after_update()
+        public void HttpFeatureToggleClient_should_update_rules_after_update()
         {
             // Arrange
             var httpClientDouble = new HttpClientDouble();
@@ -118,42 +118,42 @@ namespace MakingSense.DopplerFeatureToggle.Tests
             var client = new HttpFeatureToggleClient(httpClientDouble, "url");
 
             // Assert
-            Assert.AreEqual("default", await client.GetTreatmentAsync("Feature2", "H", "default"));
-            Assert.AreEqual("default", await client.GetTreatmentAsync("Feature2", "Z", "default"));
-            Assert.AreEqual("default", await client.GetTreatmentAsync("Feature3", "M", "default"));
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature2", "H", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature2", "Z", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature3", "M", "default").Result);
 
             // Act
-            await client.UpdateAsync();
+            client.UpdateAsync().Wait();
 
             // Assert
-            Assert.AreEqual("Treatment2A", await client.GetTreatmentAsync("Feature2", "H", "default"));
-            Assert.AreEqual("default", await client.GetTreatmentAsync("Feature2", "Z", "default"));
-            Assert.AreEqual("Disabled", await client.GetTreatmentAsync("Feature3", "M", "default"));
+            Assert.AreEqual("Treatment2A", client.GetTreatmentAsync("Feature2", "H", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature2", "Z", "default").Result);
+            Assert.AreEqual("Disabled", client.GetTreatmentAsync("Feature3", "M", "default").Result);
 
             // Arrange
             httpClientDouble.Setup_GetString(AnotherValidJsonDocument);
 
             // Act
-            await client.UpdateAsync();
+            client.UpdateAsync().Wait();
 
             // Assert
-            Assert.AreEqual("Treatment2B", await client.GetTreatmentAsync("Feature2", "Z", "default"));
+            Assert.AreEqual("Treatment2B", client.GetTreatmentAsync("Feature2", "Z", "default").Result);
 
             // Arrange
             httpClientDouble.Setup_GetString(EmptyValidJsonDocument);
 
             // Act
-            await client.UpdateAsync();
+            client.UpdateAsync().Wait();
 
             // Assert
-            Assert.AreEqual("default", await client.GetTreatmentAsync("Feature2", "H", "default"));
-            Assert.AreEqual("default", await client.GetTreatmentAsync("Feature2", "Z", "default"));
-            Assert.AreEqual("default", await client.GetTreatmentAsync("Feature3", "M", "default"));
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature2", "H", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature2", "Z", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature3", "M", "default").Result);
         }
 
 
         [Test]
-        public async Task HttpFeatureToggleClient_update_rules_based_on_remote_resource()
+        public void HttpFeatureToggleClient_update_rules_based_on_remote_resource()
         {
             // Arrange
             var httpClientDouble = new HttpClientDouble();
@@ -162,19 +162,19 @@ namespace MakingSense.DopplerFeatureToggle.Tests
             var client = new HttpFeatureToggleClient(OnlineExample1);
 
             // Assert
-            Assert.AreEqual("default", await client.GetTreatmentAsync("UnexistentFeature", "AnyValue", "default"));
-            Assert.AreEqual("default", await client.GetTreatmentAsync("Example1Feature2", "Example1H", "default"));
-            Assert.AreEqual("default", await client.GetTreatmentAsync("Example1Feature2", "Example1Z", "default"));
-            Assert.AreEqual("default", await client.GetTreatmentAsync("Example1Feature3", "Example1M", "default"));
+            Assert.AreEqual("default", client.GetTreatmentAsync("UnexistentFeature", "AnyValue", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Example1Feature2", "Example1H", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Example1Feature2", "Example1Z", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Example1Feature3", "Example1M", "default").Result);
 
             // Act
-            await client.UpdateAsync();
+            client.UpdateAsync().Wait();
 
             // Assert
-            Assert.AreEqual("default", await client.GetTreatmentAsync("UnexistentFeature", "AnyValue", "default"));
-            Assert.AreEqual("Example1Treatment2A", await client.GetTreatmentAsync("Example1Feature2", "Example1H", "default"));
-            Assert.AreEqual("default", await client.GetTreatmentAsync("Example1Feature2", "Example1Z", "default"));
-            Assert.AreEqual("Disabled", await client.GetTreatmentAsync("Example1Feature3", "Example1M", "default"));
+            Assert.AreEqual("default", client.GetTreatmentAsync("UnexistentFeature", "AnyValue", "default").Result);
+            Assert.AreEqual("Example1Treatment2A", client.GetTreatmentAsync("Example1Feature2", "Example1H", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Example1Feature2", "Example1Z", "default").Result);
+            Assert.AreEqual("Disabled", client.GetTreatmentAsync("Example1Feature3", "Example1M", "default").Result);
 
         }
     }
