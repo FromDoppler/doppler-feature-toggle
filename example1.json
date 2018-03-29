@@ -20,6 +20,21 @@
                 { "name": "Enabled", "includedDifferentiators": [ ] },
                 { "name": "Disabled", "includedDifferentiators": [ "Example1J", "Example1K", "Example1L", "Example1M" ] }
             ]
+        },
+        {
+            "name": "BooleanFeature",
+            "treatments": [
+                { "name": "Enabled", "includedDifferentiators": [ "N", "O" ] },
+                { "name": "Disabled", "includedDifferentiators": [ "P", "Q" ] }
+            ]
+        },
+        {
+            "name": "DateBehavior"",
+            "treatments": [
+                { "name": "ISO", "includedDifferentiators": [ "Andres" ] },
+                { "name": "English", "includedDifferentiators": [ "Cristian" ] },
+                { "name": "Spanish", "includedDifferentiators": [ "Mauro" ] }
+            ]
         }
     ]
 }
