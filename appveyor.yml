@@ -3,4 +3,4 @@ image: Visual Studio 2017
 build_script:
 - ps: .\Build\runbuild.ps1
 artifacts:
-- path: '**\*.nupkg'
+- path: .\Working\NuGet\*.nupkg
