@@ -156,10 +156,7 @@ namespace MakingSense.DopplerFeatureToggle.Tests
         public void HttpFeatureToggleClient_update_rules_based_on_remote_resource()
         {
             // Arrange
-            var httpClientDouble = new HttpClientDouble();
-            httpClientDouble.Setup_GetString(ValidJsonDocument);
-
-            var client = new HttpFeatureToggleClient(OnlineExample1);
+            var client = new HttpFeatureToggleClient(OnlineExample1); // OnlineExample1 refers to a real online JSON file
 
             // Assert
             Assert.AreEqual("default", client.GetTreatmentAsync("UnexistentFeature", "AnyValue", "default").Result);
