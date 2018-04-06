@@ -52,7 +52,7 @@ namespace MakingSense.DopplerFeatureToggle
 
             var due = TimeSpan.FromMilliseconds(200);
             var period = TimeSpan.FromMilliseconds(1000);
-            var testTime = TimeSpan.FromMilliseconds(300);
+            var testTime = TimeSpan.FromMilliseconds(400);
 
             // Act
             var worker = updater.UpdatePeriodically(due, period);
