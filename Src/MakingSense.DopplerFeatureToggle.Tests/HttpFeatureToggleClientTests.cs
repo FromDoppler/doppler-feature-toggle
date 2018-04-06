@@ -151,6 +151,74 @@ namespace MakingSense.DopplerFeatureToggle.Tests
             Assert.AreEqual("default", client.GetTreatmentAsync("Feature3", "M", "default").Result);
         }
 
+        [Test]
+        public void HttpFeatureToggleClient_should_ignore_invalid_responses()
+        {
+            // Arrange
+            var httpClientDouble = new HttpClientDouble();
+            httpClientDouble.Setup_GetString(ValidJsonDocument);
+            var client = new HttpFeatureToggleClient(httpClientDouble, "url");
+            client.UpdateAsync().Wait();
+
+            Assert.AreEqual("Treatment2A", client.GetTreatmentAsync("Feature2", "H", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature2", "Z", "default").Result);
+            Assert.AreEqual("Disabled", client.GetTreatmentAsync("Feature3", "M", "default").Result);
+
+            httpClientDouble.Setup_GetString("INVALID CONTENT");
+
+            // Act
+            try
+            {
+                client.UpdateAsync().Wait();
+            }
+            catch
+            {
+                // Ignoring exception, UpdatePeriodically ignore them
+            }
+
+            // Assert
+            Assert.AreEqual("Treatment2A", client.GetTreatmentAsync("Feature2", "H", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature2", "Z", "default").Result);
+            Assert.AreEqual("Disabled", client.GetTreatmentAsync("Feature3", "M", "default").Result);
+        }
+
+        [Test]
+        public void HttpFeatureToggleClient_should_continue_working_after_invalid_response()
+        {
+            // Arrange
+            var httpClientDouble = new HttpClientDouble();
+            httpClientDouble.Setup_GetString(ValidJsonDocument);
+            var client = new HttpFeatureToggleClient(httpClientDouble, "url");
+            client.UpdateAsync().Wait();
+
+            Assert.AreEqual("Treatment2A", client.GetTreatmentAsync("Feature2", "H", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature2", "Z", "default").Result);
+            Assert.AreEqual("Disabled", client.GetTreatmentAsync("Feature3", "M", "default").Result);
+
+            httpClientDouble.Setup_GetString("INVALID CONTENT");
+            try
+            {
+                client.UpdateAsync().Wait();
+            }
+            catch
+            {
+                // Ignoring exception, UpdatePeriodically ignore them
+            }
+
+            Assert.AreEqual("Treatment2A", client.GetTreatmentAsync("Feature2", "H", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature2", "Z", "default").Result);
+            Assert.AreEqual("Disabled", client.GetTreatmentAsync("Feature3", "M", "default").Result);
+
+            httpClientDouble.Setup_GetString(EmptyValidJsonDocument);
+
+            // Act
+            client.UpdateAsync().Wait();
+
+            // Assert
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature2", "H", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature2", "Z", "default").Result);
+            Assert.AreEqual("default", client.GetTreatmentAsync("Feature3", "M", "default").Result);
+        }
 
         [Test]
         public void HttpFeatureToggleClient_update_rules_based_on_remote_resource()
