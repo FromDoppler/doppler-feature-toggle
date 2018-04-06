@@ -85,6 +85,12 @@ namespace MakingSense.DopplerFeatureToggle
             return this;
         }
 
+        public FeatureToggleAccessorBuilder<T> AddBehavior(string treatment, T behavior)
+        {
+            _treatments[treatment] = () => behavior;
+            return this;
+        }
+
         public FeatureToggleAccessorBuilder<T> AddBehavior(string treatment, Func<T> behavior)
         {
             _treatments[treatment] = behavior;

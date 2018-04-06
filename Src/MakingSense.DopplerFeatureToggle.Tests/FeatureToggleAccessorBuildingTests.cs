@@ -80,25 +80,25 @@ namespace MakingSense.DopplerFeatureToggle.Tests
 
             var booleanAccessor = client
                 .CreateFeature<bool>("BooleanFeature")
-                .AddBehavior("Disabled", () => false)
-                .AddBehavior("Enabled", () => true)
+                .AddBehavior("Disabled", false)
+                .AddBehavior("Enabled", true)
                 .SetDefaultTreatment("Disabled")
                 .ForceTreatmentIfNotNull(null)
                 .Build();
 
             var forcedBooleanAccessor = client
                 .CreateFeature<bool>("BooleanFeature")
-                .AddBehavior("Disabled", () => false)
-                .AddBehavior("Enabled", () => true)
+                .AddBehavior("Disabled", false)
+                .AddBehavior("Enabled", true)
                 .SetDefaultTreatment("Disabled")
                 .ForceTreatmentIfNotNull("Enabled")
                 .Build();
 
             var dateFormatAccessor = client
                 .CreateFeature<DateTime, string>("DateBehavior")
-                .AddBehavior("ISO", () => x => x.ToString("yyyy-MM-dd"))
-                .AddBehavior("English", () => x => x.ToString("MM/dd/yyyy"))
-                .AddBehavior("Spanish", () => x => x.ToString("dd/MM/yyyy"))
+                .AddBehavior("ISO", x => x.ToString("yyyy-MM-dd"))
+                .AddBehavior("English", x => x.ToString("MM/dd/yyyy"))
+                .AddBehavior("Spanish", x => x.ToString("dd/MM/yyyy"))
                 .SetDefaultTreatment("ISO")
                 .Build();
 
@@ -118,16 +118,11 @@ namespace MakingSense.DopplerFeatureToggle.Tests
             Assert.AreEqual(true, forcedBooleanAccessor.Get("Q"));
             Assert.AreEqual(true, forcedBooleanAccessor.Get("NotExistentDifferentiator"));
 
-            var mauroFormatter = dateFormatAccessor.Get("Mauro");
-            var cristianFormatter = dateFormatAccessor.Get("Cristian");
-            var andresFormatter = dateFormatAccessor.Get("Andres");
-            var defaultFormatter = dateFormatAccessor.Get("NotExistentDifferentiator");
-
             var date = new DateTime(2018, 12, 20);
-            Assert.AreEqual("20/12/2018", mauroFormatter(date));
-            Assert.AreEqual("12/20/2018", cristianFormatter(date));
-            Assert.AreEqual("2018-12-20", andresFormatter(date));
-            Assert.AreEqual("2018-12-20", defaultFormatter(date));
+            Assert.AreEqual("20/12/2018", dateFormatAccessor.Get("Mauro", date));
+            Assert.AreEqual("12/20/2018", dateFormatAccessor.Get("Cristian", date));
+            Assert.AreEqual("2018-12-20", dateFormatAccessor.Get("Andres", date));
+            Assert.AreEqual("2018-12-20", dateFormatAccessor.Get("NotExistentDifferentiator", date));
         }
 
         [Test]
@@ -141,8 +136,8 @@ namespace MakingSense.DopplerFeatureToggle.Tests
             {
                 var booleanAccessor = client
                     .CreateFeature<bool>("BooleanFeature")
-                    .AddBehavior("Disabled", () => false)
-                    .AddBehavior("Enabled", () => true)
+                    .AddBehavior("Disabled", false)
+                    .AddBehavior("Enabled", true)
                     .SetDefaultTreatment("Disabled")
                     .ForceTreatmentIfNotNull("ANOTHER")
                     .Build();
@@ -166,8 +161,8 @@ namespace MakingSense.DopplerFeatureToggle.Tests
             {
                 var booleanAccessor = client
                     .CreateFeature<bool>("BooleanFeature")
-                    .AddBehavior("Disabled", () => false)
-                    .AddBehavior("Enabled", () => true)
+                    .AddBehavior("Disabled", false)
+                    .AddBehavior("Enabled", true)
                     .SetDefaultTreatment("ANOTHER")
                     .Build();
                 Assert.Fail("Expected exception not thrown");
@@ -190,8 +185,8 @@ namespace MakingSense.DopplerFeatureToggle.Tests
             {
                 var booleanAccessor = client
                     .CreateFeature<bool>("BooleanFeature")
-                    .AddBehavior("Disabled", () => false)
-                    .AddBehavior("Enabled", () => true)
+                    .AddBehavior("Disabled", false)
+                    .AddBehavior("Enabled", true)
                     .Build();
                 Assert.Fail("Expected exception not thrown");
             }
