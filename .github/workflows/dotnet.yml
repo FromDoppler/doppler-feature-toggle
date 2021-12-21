@@ -1,0 +1,58 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  continuous-delivery:
+    name: Continuous Delivery
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+    - name: Restore tools
+      run: dotnet tool restore
+    - name: Verify code format
+      run: dotnet dotnet-format --check
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+    - name: Test with dotnet
+      run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage"
+    - uses: codecov/codecov-action@v2.1.0
+
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.11
+      with:
+        versionSpec: '5.x'
+    - name: Determine Version
+      id: gitversion # step id used as reference for output values
+      uses: gittools/actions/gitversion/execute@v0.9.11
+    - name: Semantic Version
+      run: |
+        echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
+        echo "FullSemVer: ${{ steps.gitversion.outputs.fullSemVer }}"
+        echo "NuGetVersion: ${{ steps.gitversion.outputs.nuGetVersion }}"
+        echo "MajorMinorPatch: ${{ steps.gitversion.outputs.majorMinorPatch }}"
+        echo "Major: ${{ steps.gitversion.outputs.major }}"
+        echo "Minor: ${{ steps.gitversion.outputs.minor }}"
+        echo "Patch: ${{ steps.gitversion.outputs.patch }}"
+        echo "PreReleaseTag: ${{ steps.gitversion.outputs.preReleaseTag }}"
+        
+    - name: Pack nuget
+      run: dotnet pack --output ./artifacts --configuration Release -p:Version=${{ steps.gitversion.outputs.nuGetVersion }}
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: artifacts
+        path: ./artifacts
+    - name: Delivery nuget to AppVeyor registry
+      run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{secrets.APPVEYOR_NUGET_API_KEY}} --source 'https://ci.appveyor.com/nuget/makingsense-aspnet/api/v2/package'
