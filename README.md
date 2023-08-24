@@ -6,9 +6,10 @@ Simple Feature Toggle client for .NET.
 
 <https://ci.appveyor.com/nuget/makingsense-aspnet> (authenticated)
 
-Authentication: 
-* user: `dtru+read@makingsense.com`
-* password: `4@pdw@BlfpQn`
+Authentication:
+
+- user: `dtru+read@makingsense.com`
+- password: `4@pdw@BlfpQn`
 
 `NuGet.config` file example:
 
@@ -142,6 +143,3 @@ class AnyService
     }
 }
 ```
-
-
-

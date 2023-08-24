@@ -32,7 +32,6 @@
   <ItemGroup>
     <None Remove="**\*.orig" />
     <None Include="..\LICENSE" Pack="true" PackagePath="LICENSE.md" />
-    <None Include="..\Build\install.ps1" Pack="true" PackagePath="Tools\install.ps1" />
   </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
     <AssemblyTitle>DopplerFeatureToggle.NET</AssemblyTitle>
