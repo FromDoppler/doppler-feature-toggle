@@ -1,6 +1,0 @@
-version: 0.0.1-alpha1-{build}
-image: Visual Studio 2017
-build_script:
-- ps: .\runbuild-appveyor.ps1
-artifacts:
-- path: .\Working\NuGet\*.nupkg
