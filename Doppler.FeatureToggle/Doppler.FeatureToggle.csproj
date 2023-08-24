@@ -70,7 +70,7 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net35'">
     <PackageReference Include="Rackspace.HttpClient35" Version="1.0.0-beta003" />
-    <PackageReference Include="AsyncBridge.Net35" Version="0.2.0" />
+    <PackageReference Include="AsyncBridge.Net35" Version="0.3.1" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
