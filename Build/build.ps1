@@ -4,7 +4,7 @@
   $majorWithReleaseVersion = "0.0.1-alpha1"
   $nugetPrerelease = $null
   $version = GetVersion $majorWithReleaseVersion
-  $packageId = "MakingSense.DopplerFeatureToggle"
+  $packageId = "Doppler.FeatureToggle"
   $signAssemblies = $false
   $signKeyPath = "C:\projects\release-relay\dopplerfeaturetoggle.snk"
   $buildDocumentation = $false
@@ -78,15 +78,15 @@ task Build -depends Clean {
   mkdir "$workingDir\Build" -Force
   Copy-Item -Path $buildDir\install.ps1 -Destination $workingDir\Build\
 
-  $xml = [xml](Get-Content "$workingSourceDir\MakingSense.DopplerFeatureToggle\MakingSense.DopplerFeatureToggle.csproj")
+  $xml = [xml](Get-Content "$workingSourceDir\Doppler.FeatureToggle\Doppler.FeatureToggle.csproj")
   Edit-XmlNodes -doc $xml -xpath "/Project/PropertyGroup/PackageId" -value $packageId
   Edit-XmlNodes -doc $xml -xpath "/Project/PropertyGroup/VersionPrefix" -value $majorWithReleaseVersion
   Edit-XmlNodes -doc $xml -xpath "/Project/PropertyGroup/VersionSuffix" -value $nugetPrerelease
   Edit-XmlNodes -doc $xml -xpath "/Project/PropertyGroup/AssemblyVersion" -value ($majorVersion + '.0.0')
   Edit-XmlNodes -doc $xml -xpath "/Project/PropertyGroup/FileVersion" -value $version
-  $xml.save("$workingSourceDir\MakingSense.DopplerFeatureToggle\MakingSense.DopplerFeatureToggle.csproj")
+  $xml.save("$workingSourceDir\Doppler.FeatureToggle\Doppler.FeatureToggle.csproj")
 
-  $projectPath = "$workingSourceDir\MakingSense.DopplerFeatureToggle\MakingSense.DopplerFeatureToggle.csproj"
+  $projectPath = "$workingSourceDir\Doppler.FeatureToggle\Doppler.FeatureToggle.csproj"
 
   NetCliBuild
 }
@@ -97,7 +97,7 @@ task Package -depends Build {
   {
     $finalDir = $build.Framework
 
-    $sourcePath = "$workingSourceDir\MakingSense.DopplerFeatureToggle\bin\Release\$finalDir"
+    $sourcePath = "$workingSourceDir\Doppler.FeatureToggle\bin\Release\$finalDir"
 
     if (!(Test-Path -path $sourcePath))
     {
@@ -113,10 +113,10 @@ task Package -depends Build {
 
     $targetFrameworks = ($script:enabledBuilds | Select-Object @{Name="Framework";Expression={$_.Framework}} | select -expand Framework) -join ";"
 
-    exec { & $script:msBuildPath "/t:pack" "/p:IncludeSource=true" "/p:Configuration=Release" "/p:TargetFrameworks=`"$targetFrameworks`"" "$workingSourceDir\MakingSense.DopplerFeatureToggle\MakingSense.DopplerFeatureToggle.csproj" }
+    exec { & $script:msBuildPath "/t:pack" "/p:IncludeSource=true" "/p:Configuration=Release" "/p:TargetFrameworks=`"$targetFrameworks`"" "$workingSourceDir\Doppler.FeatureToggle\Doppler.FeatureToggle.csproj" }
 
     mkdir $workingDir\NuGet
-    move -Path $workingSourceDir\MakingSense.DopplerFeatureToggle\bin\Release\*.nupkg -Destination $workingDir\NuGet
+    move -Path $workingSourceDir\Doppler.FeatureToggle\bin\Release\*.nupkg -Destination $workingDir\NuGet
   }
 
   Write-Host "Build documentation: $buildDocumentation"
@@ -163,7 +163,7 @@ task Test -depends Deploy {
 
 function NetCliBuild()
 {
-  $projectPath = "$workingSourceDir\MakingSense.DopplerFeatureToggle.sln"
+  $projectPath = "$workingSourceDir\Doppler.FeatureToggle.sln"
   $libraryFrameworks = ($script:enabledBuilds | Select-Object @{Name="Framework";Expression={$_.Framework}} | select -expand Framework) -join ";"
   $testFrameworks = ($script:enabledBuilds | Select-Object @{Name="Resolved";Expression={if ($_.TestFramework -ne $null) { $_.TestFramework } else { $_.Framework }}} | select -expand Resolved) -join ";"
 
@@ -209,8 +209,8 @@ function GetMsBuildPath()
 
 function NetCliTests($build)
 {
-  $projectPath = "$workingSourceDir\MakingSense.DopplerFeatureToggle.Tests\MakingSense.DopplerFeatureToggle.Tests.csproj"
-  $location = "$workingSourceDir\MakingSense.DopplerFeatureToggle.Tests"
+  $projectPath = "$workingSourceDir\Doppler.FeatureToggle.Tests\Doppler.FeatureToggle.Tests.csproj"
+  $location = "$workingSourceDir\Doppler.FeatureToggle.Tests"
   $testDir = if ($build.TestFramework -ne $null) { $build.TestFramework } else { $build.Framework }
 
   exec { .\Tools\Dotnet\dotnet-install.ps1 -Version $netCliVersion | Out-Default }
@@ -241,14 +241,14 @@ function NUnitTests($build)
 
   Write-Host -ForegroundColor Green "Copying test assembly $testDir to deployed directory"
   Write-Host
-  robocopy "$workingSourceDir\MakingSense.DopplerFeatureToggle.Tests\bin\Release\$testDir" $testRunDir /MIR /NFL /NDL /NJS /NC /NS /NP /XO | Out-Default
+  robocopy "$workingSourceDir\Doppler.FeatureToggle.Tests\bin\Release\$testDir" $testRunDir /MIR /NFL /NDL /NJS /NC /NS /NP /XO | Out-Default
 
   Write-Host -ForegroundColor Green "Running NUnit tests $testDir"
   Write-Host
   try
   {
     Set-Location $testRunDir
-    exec { & $nunitConsolePath\tools\nunit3-console.exe "$testRunDir\MakingSense.DopplerFeatureToggle.Tests.dll" --framework=$framework --result=$workingDir\$testDir.xml | Out-Default } "Error running $testDir tests"
+    exec { & $nunitConsolePath\tools\nunit3-console.exe "$testRunDir\Doppler.FeatureToggle.Tests.dll" --framework=$framework --result=$workingDir\$testDir.xml | Out-Default } "Error running $testDir tests"
   }
   finally
   {

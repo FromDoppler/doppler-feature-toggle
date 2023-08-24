@@ -10,7 +10,7 @@
     <TargetFrameworks Condition="'$(TestFrameworks)'!=''">$(TestFrameworks)</TargetFrameworks>
     <VersionPrefix>1.0</VersionPrefix>
     <Authors>Doppler Relay Team</Authors>
-    <Company>Making Sense</Company>
+    <Company>Doppler</Company>
     <Product>DopplerFeatureToggle.NET</Product>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Copyright>Copyright © Doppler Relay Team 2017</Copyright>

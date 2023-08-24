@@ -7,7 +7,7 @@
     <VersionPrefix>0.2.0</VersionPrefix>
     <VersionSuffix>alpha2</VersionSuffix>
     <Authors>Doppler Relay Team</Authors>
-    <Company>Making Sense</Company>
+    <Company>Doppler</Company>
     <Product>DopplerFeatureToggle.NET</Product>
     <Description>A .NET implementation of Google Safe Browsing Update API (or another alternative API)</Description>
     <Copyright>Copyright © Doppler Relay Team 2017</Copyright>
