@@ -9,11 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		NuGet.Config = NuGet.Config
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakingSense.DopplerFeatureToggle", "MakingSense.DopplerFeatureToggle\MakingSense.DopplerFeatureToggle.csproj", "{99FD3325-3617-4204-B81F-6DDAE5A1C29C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doppler.FeatureToggle", "Doppler.FeatureToggle\Doppler.FeatureToggle.csproj", "{99FD3325-3617-4204-B81F-6DDAE5A1C29C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakingSense.DopplerFeatureToggle.Tests", "MakingSense.DopplerFeatureToggle.Tests\MakingSense.DopplerFeatureToggle.Tests.csproj", "{1CD4A51C-638A-4FC8-A20A-144C36D064BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doppler.FeatureToggle.Tests", "Doppler.FeatureToggle.Tests\Doppler.FeatureToggle.Tests.csproj", "{1CD4A51C-638A-4FC8-A20A-144C36D064BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakingSense.DopplerFeatureToggle.TestConsole", "MakingSense.DopplerFeatureToggle.TestConsole\MakingSense.DopplerFeatureToggle.TestConsole.csproj", "{DD83B078-8844-4BB1-A122-E5693FAE0228}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doppler.FeatureToggle.TestConsole", "Doppler.FeatureToggle.TestConsole\Doppler.FeatureToggle.TestConsole.csproj", "{DD83B078-8844-4BB1-A122-E5693FAE0228}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
