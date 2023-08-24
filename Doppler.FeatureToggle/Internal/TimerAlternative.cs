@@ -23,7 +23,6 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-#if (!NET35 && !NET40)
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,4 +73,3 @@ namespace Doppler.FeatureToggle.Internal
         }
     }
 }
-#endif

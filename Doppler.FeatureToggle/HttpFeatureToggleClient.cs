@@ -18,7 +18,7 @@ namespace Doppler.FeatureToggle
         private readonly IHttpClient _httpClient;
         private readonly string _url;
         private string _lastEtag = null;
-#if NET45 || NETSTANDARD1_0 || NETSTANDARD1_3
+#if NETSTANDARD1_0 || NETSTANDARD1_3
         private IReadOnlyDictionary<string, Feature> _features = new ReadOnlyDictionary<string, Feature>(new Dictionary<string, Feature>());
 #else
         private IDictionary<string, Feature> _features = new Dictionary<string, Feature>();
@@ -71,7 +71,7 @@ namespace Doppler.FeatureToggle
             _lastEtag = response.Etag;
             var json = JObject.Parse(response.Body);
             var parsed = ParseFeatures(json);
-#if NET45 || NETSTANDARD1_0 || NETSTANDARD1_3
+#if NETSTANDARD1_0 || NETSTANDARD1_3
             _features = new ReadOnlyDictionary<string, Feature>(parsed);
 #else
             _features = parsed;
@@ -81,7 +81,7 @@ namespace Doppler.FeatureToggle
         private class Feature
         {
             public string Name { get; }
-#if NET45 || NETSTANDARD1_0 || NETSTANDARD1_3
+#if NETSTANDARD1_0 || NETSTANDARD1_3
             public IReadOnlyDictionary<string, Treatment> Treatments { get; }
 #else
             public Dictionary<string, Treatment> Treatments { get; }
@@ -90,7 +90,7 @@ namespace Doppler.FeatureToggle
             public Feature(string name, IDictionary<string, Treatment> treatments)
             {
                 Name = name;
-#if NET45 || NETSTANDARD1_0 || NETSTANDARD1_3
+#if NETSTANDARD1_0 || NETSTANDARD1_3
                 Treatments = new ReadOnlyDictionary<string, Treatment>(treatments);
 #else
                 Treatments = treatments.ToDictionary(x => x.Key, x => x.Value);
@@ -101,11 +101,8 @@ namespace Doppler.FeatureToggle
         private class Treatment
         {
             public string Name { get; }
-#if NET35
-            public HashSet<string> IncludedDifferentiators { get; }
-#else
+
             public ISet<string> IncludedDifferentiators { get; }
-#endif
 
             public Treatment(string name, IEnumerable<string> includedDifferentiators)
             {
