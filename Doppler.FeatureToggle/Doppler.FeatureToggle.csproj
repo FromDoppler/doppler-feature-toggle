@@ -14,15 +14,15 @@
     <Summary>A .NET implementation of Google Safe Browsing Update API (or another alternative API)</Summary>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Title>DopplerFeatureToggle.NET</Title>
-    <PackageId>MakingSense.DopplerFeatureToggle</PackageId>
+    <PackageId>Doppler.FeatureToggle</PackageId>
     <PackageTags>url, Safe Browsing, phishing, malware, unwanted software</PackageTags>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/21225122?s=200</PackageIconUrl>
     <PackageProjectUrl>https://github.com/MakingSense/safe-browsing</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/MakingSense/safe-browsing/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/MakingSense/safe-browsing</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <RootNamespace>MakingSense.DopplerFeatureToggle</RootNamespace>
-    <AssemblyName>MakingSense.DopplerFeatureToggle</AssemblyName>
+    <RootNamespace>Doppler.FeatureToggle</RootNamespace>
+    <AssemblyName>Doppler.FeatureToggle</AssemblyName>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
     <MinClientVersion>2.12</MinClientVersion>

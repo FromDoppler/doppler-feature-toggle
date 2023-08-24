@@ -1,4 +1,4 @@
-﻿using MakingSense.DopplerFeatureToggle.Internal;
+﻿using Doppler.FeatureToggle.Internal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MakingSense.DopplerFeatureToggle
+namespace Doppler.FeatureToggle
 {
     /// <inheritdoc />
     public class HttpFeatureToggleClient : IFeatureToggleClient

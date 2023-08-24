@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MakingSense.DopplerFeatureToggle.Internal
+namespace Doppler.FeatureToggle.Internal
 {
     /// <summary>
     /// Utilities to simplify Task usage in different frameworks

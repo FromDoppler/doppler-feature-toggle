@@ -35,7 +35,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 
-namespace MakingSense.DopplerFeatureToggle.Tests.Benchmarks
+namespace Doppler.FeatureToggle.Tests.Benchmarks
 {
     public class LowLevelBenchmarks
     {

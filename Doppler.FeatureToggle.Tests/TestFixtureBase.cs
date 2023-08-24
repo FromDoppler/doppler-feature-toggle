@@ -32,7 +32,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 #if DNXCORE50
 using Xunit;
-using Assert = MakingSense.DopplerFeatureToggle.Tests.XUnitAssert;
+using Assert = Doppler.FeatureToggle.Tests.XUnitAssert;
 using XAssert = Xunit.Assert;
 #else
 using NUnit.Framework;
@@ -43,7 +43,7 @@ using System.Threading.Tasks;
 #endif
 using System.Linq;
 
-namespace MakingSense.DopplerFeatureToggle.Tests
+namespace Doppler.FeatureToggle.Tests
 {
     public class TestReflectionUtils
     {
