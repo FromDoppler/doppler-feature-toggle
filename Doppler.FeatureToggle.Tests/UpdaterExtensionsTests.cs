@@ -27,18 +27,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MakingSense.DopplerFeatureToggle.Tests;
 using System.Threading.Tasks;
-using MakingSense.DopplerFeatureToggle.Internal;
+using Doppler.FeatureToggle.Internal;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
-using Assert = MakingSense.DopplerFeatureToggle.Tests.XUnitAssert;
+using Assert = Doppler.FeatureToggle.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
 
-namespace MakingSense.DopplerFeatureToggle
+namespace Doppler.FeatureToggle.Tests
 {
     [TestFixture]
     public class UpdaterExtensionsTests : TestFixtureBase

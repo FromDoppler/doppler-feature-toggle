@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MakingSense.DopplerFeatureToggle
+namespace Doppler.FeatureToggle
 {
     /// <summary>
     /// Something that can update an object based on a resource

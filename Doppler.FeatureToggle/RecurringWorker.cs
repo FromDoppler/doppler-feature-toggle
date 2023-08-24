@@ -28,13 +28,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 #if (NETSTANDARD1_0)
-using Timer = MakingSense.DopplerFeatureToggle.Internal.TimerAlternative;
+using Timer = Doppler.FeatureToggle.Internal.TimerAlternative;
 #else
 using System.Threading;
 #endif
 using System.Threading.Tasks;
 
-namespace MakingSense.DopplerFeatureToggle
+namespace Doppler.FeatureToggle
 {
     /// <summary>
     /// Executes an action periodically

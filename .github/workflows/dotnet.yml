@@ -10,9 +10,6 @@ jobs:
   continuous-delivery:
     name: Continuous Delivery
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Src
     steps:
     - name: Checkout
       uses: actions/checkout@v2

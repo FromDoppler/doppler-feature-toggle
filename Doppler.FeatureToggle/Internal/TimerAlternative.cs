@@ -31,7 +31,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MakingSense.DopplerFeatureToggle.Internal
+namespace Doppler.FeatureToggle.Internal
 {
     /// <summary>
     /// Alternative for Timer

@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MakingSense.DopplerFeatureToggle.Internal
+namespace Doppler.FeatureToggle.Internal
 {
     /// <summary>
     /// Wrapper around System.Net.Http.HttpClient to allow easily implement a compatible version for netstandard1.0

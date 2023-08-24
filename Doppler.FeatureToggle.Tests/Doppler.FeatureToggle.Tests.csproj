@@ -2,7 +2,7 @@
   <Target Name="WorkAroundPackageAndProjectReferenceConflict" BeforeTargets="ResolveLockFileReferences">
     <ItemGroup>
       <!-- Required for https://github.com/dotnet/roslyn-project-system/issues/1386 -->
-      <ResolvedCompileFileDefinitions Remove="@(ResolvedCompileFileDefinitions)" Condition="'%(ResolvedCompileFileDefinitions.Filename)' == 'MakingSense.DopplerFeatureToggle'" />
+      <ResolvedCompileFileDefinitions Remove="@(ResolvedCompileFileDefinitions)" Condition="'%(ResolvedCompileFileDefinitions.Filename)' == 'Doppler.FeatureToggle'" />
     </ItemGroup>
   </Target>
   <PropertyGroup>
@@ -10,19 +10,19 @@
     <TargetFrameworks Condition="'$(TestFrameworks)'!=''">$(TestFrameworks)</TargetFrameworks>
     <VersionPrefix>1.0</VersionPrefix>
     <Authors>Doppler Relay Team</Authors>
-    <Company>Making Sense</Company>
+    <Company>Doppler</Company>
     <Product>DopplerFeatureToggle.NET</Product>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Copyright>Copyright © Doppler Relay Team 2017</Copyright>
-    <AssemblyName>MakingSense.DopplerFeatureToggle.Tests</AssemblyName>
-    <RootNamespace>MakingSense.DopplerFeatureToggle.Tests</RootNamespace>
+    <AssemblyName>Doppler.FeatureToggle.Tests</AssemblyName>
+    <RootNamespace>Doppler.FeatureToggle.Tests</RootNamespace>
     <!-- Workaround for https://github.com/nunit/nunit3-vs-adapter/issues/296 -->
     <DebugType Condition="'$(TargetFramework)' != '' AND '$(TargetFramework)' != 'netcoreapp1.0' AND '$(TargetFramework)' != 'netcoreapp1.1'">Full</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <!-- Tracking for removal https://github.com/Microsoft/vstest/issues/472 -->
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
-    <ProjectReference Include="..\MakingSense.DopplerFeatureToggle\MakingSense.DopplerFeatureToggle.csproj" />
+    <ProjectReference Include="..\Doppler.FeatureToggle\Doppler.FeatureToggle.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net46'">

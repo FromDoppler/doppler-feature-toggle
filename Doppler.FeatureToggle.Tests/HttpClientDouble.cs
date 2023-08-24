@@ -1,12 +1,12 @@
 ﻿#pragma warning disable 1998 // Because I want to generate tasks from synchronous code
-using MakingSense.DopplerFeatureToggle.Internal;
+using Doppler.FeatureToggle.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MakingSense.DopplerFeatureToggle.Tests
+namespace Doppler.FeatureToggle.Tests
 {
     public class HttpClientDouble : IHttpClient
     {

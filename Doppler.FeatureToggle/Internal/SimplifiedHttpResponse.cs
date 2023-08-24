@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MakingSense.DopplerFeatureToggle
+namespace Doppler.FeatureToggle.Internal
 {
     /// <summary>
     /// A simplified representation of a HTTP response

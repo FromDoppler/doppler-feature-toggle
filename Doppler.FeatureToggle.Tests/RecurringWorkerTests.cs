@@ -23,8 +23,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using MakingSense.DopplerFeatureToggle.Internal;
-using MakingSense.DopplerFeatureToggle.Tests;
+using Doppler.FeatureToggle.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,12 +34,12 @@ using System.Threading;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
-using Assert = MakingSense.DopplerFeatureToggle.Tests.XUnitAssert;
+using Assert = Doppler.FeatureToggle.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
 
-namespace MakingSense.DopplerFeatureToggle
+namespace Doppler.FeatureToggle.Tests
 {
     [TestFixture]
     public class RecurringWorkerTests : TestFixtureBase

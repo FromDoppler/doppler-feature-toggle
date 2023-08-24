@@ -26,11 +26,11 @@
 using System;
 using System.Diagnostics;
 using BenchmarkDotNet.Running;
-using MakingSense.DopplerFeatureToggle;
-using MakingSense.DopplerFeatureToggle.Tests.Benchmarks;
+using Doppler.FeatureToggle;
+using Doppler.FeatureToggle.Tests.Benchmarks;
 using System.Reflection;
 
-namespace MakingSense.DopplerFeatureToggle.TestConsole
+namespace Doppler.FeatureToggle.TestConsole
 {
     public class Program
     {

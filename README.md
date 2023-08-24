@@ -5,7 +5,7 @@
 
 Simple Feature Toggle client for .NET.
 
-~~Nuget package available at [MakingSense.DopplerFeatureToggle](https://preview.nuget.org/packages/MakingSense.DopplerFeatureToggle)~~ (not available yet).
+~~Nuget package available at [Doppler.FeatureToggle](https://preview.nuget.org/packages/Doppler.FeatureToggle)~~ (not available yet).
 
 ## Pre-release NuGet feed
 
