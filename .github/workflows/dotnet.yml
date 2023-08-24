@@ -30,12 +30,12 @@ jobs:
       - uses: codecov/codecov-action@v2.1.0
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.11
+        uses: gittools/actions/gitversion/setup@v0.10.2
         with:
           versionSpec: "5.x"
       - name: Determine Version
         id: gitversion # step id used as reference for output values
-        uses: gittools/actions/gitversion/execute@v0.9.11
+        uses: gittools/actions/gitversion/execute@v0.10.2
       - name: Semantic Version
         run: |
           echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
