@@ -27,7 +27,7 @@ jobs:
         run: dotnet build --configuration Release
       - name: Test with dotnet
         run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage"
-      - uses: codecov/codecov-action@v2.1.0
+      - uses: codecov/codecov-action@v3.1.4
 
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.10.2
