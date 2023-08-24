@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net46;net6.0</TargetFrameworks>
+    <TargetFrameworks>net46;net6.0;net7.0</TargetFrameworks>
     <RootNamespace>MakingSense.DopplerFeatureToggle.TestConsole</RootNamespace>
     <AssemblyName>MakingSense.DopplerFeatureToggle.TestConsole</AssemblyName>
   </PropertyGroup>
