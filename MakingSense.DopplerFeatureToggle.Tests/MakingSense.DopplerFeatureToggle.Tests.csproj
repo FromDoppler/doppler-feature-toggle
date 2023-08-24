@@ -22,7 +22,7 @@
   <ItemGroup>
     <!-- Tracking for removal https://github.com/Microsoft/vstest/issues/472 -->
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
-    <ProjectReference Include="..\MakingSense.DopplerFeatureToggle\MakingSense.DopplerFeatureToggle.csproj" />
+    <ProjectReference Include="..\Doppler.FeatureToggle\Doppler.FeatureToggle.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net46'">

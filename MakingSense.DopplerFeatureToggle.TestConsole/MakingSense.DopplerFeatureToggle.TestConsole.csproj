@@ -9,6 +9,6 @@
     <None Remove="BenchmarkDotNet.Artifacts\**" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MakingSense.DopplerFeatureToggle.Tests\MakingSense.DopplerFeatureToggle.Tests.csproj" />
+    <ProjectReference Include="..\Doppler.FeatureToggle.Tests\Doppler.FeatureToggle.Tests.csproj" />
   </ItemGroup>
 </Project>
