@@ -10,5 +10,9 @@ on:
 
 jobs:
   dotnet:
-    name: .NET
+    name: Continuous Integration
     uses: FromDoppler/.github/.github/workflows/dotnet.yml@main
+  nuget:
+    if: ${{ github.event_name == 'push' }}
+    name: Continuous Delivery
+    uses: FromDoppler/.github/.github/workflows/continuous-delivery-nuget.yml@main
