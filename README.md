@@ -1,15 +1,13 @@
 # doppler-feature-toggle
 
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
+[![FromDoppler](https://github.com/FromDoppler/doppler-feature-toggle/actions/workflows/fromdoppler.yml/badge.svg)](https://github.com/FromDoppler/doppler-feature-toggle/actions/workflows/fromdoppler.yml)
+[![codecov](https://codecov.io/gh/FromDoppler/doppler-feature-toggle/branch/main/graph/badge.svg?token=2Wj9lHkIfO)](https://codecov.io/gh/FromDoppler/doppler-feature-toggle)
+
 Simple Feature Toggle client for .NET.
 
-## Pre-release NuGet feed
-
-<https://ci.appveyor.com/nuget/makingsense-aspnet> (authenticated)
-
-Authentication:
-
-- user: `dtru+read@makingsense.com`
-- password: `4@pdw@BlfpQn`
+## NuGet feed
 
 `NuGet.config` file example:
 
@@ -17,15 +15,14 @@ Authentication:
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
 	<packageSources>
-		<clear />
-		<add key="api.nuget.org" value="https://api.nuget.org/v3/index.json" />
-		<add key="makingsense-aspnet" value="https://ci.appveyor.com/nuget/makingsense-aspnet" />
+		<!--To inherit the global NuGet package sources remove the <clear/> line below -->
+		<add key="github-fromdoppler" value="https://nuget.pkg.github.com/FromDoppler/index.json" />
 	</packageSources>
 	<packageSourceCredentials>
-		<makingsense-aspnet>
-			<add key="Username" value="dtru+read@makingsense.com" />
-			<add key="ClearTextPassword" value="4@pdw@BlfpQn" />
-		</makingsense-aspnet>
+		<github-fromdoppler>
+			<add key="Username" value="readonly" />
+			<add key="ClearTextPassword" value="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" />
+		</github-fromdoppler>
 	</packageSourceCredentials>
 </configuration>
 ```
