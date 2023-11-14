@@ -27,7 +27,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)'=='net7.0'">
     <PackageReference Include="BenchmarkDotNet" Version="0.13.10" />
-    <PackageReference Include="FSharp.Core" Version="7.0.401" />
+    <PackageReference Include="FSharp.Core" Version="7.0.402" />
     <PackageReference Include="System.ObjectModel" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
