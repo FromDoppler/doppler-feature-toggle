@@ -3,7 +3,7 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 [![FromDoppler](https://github.com/FromDoppler/doppler-feature-toggle/actions/workflows/fromdoppler.yml/badge.svg)](https://github.com/FromDoppler/doppler-feature-toggle/actions/workflows/fromdoppler.yml)
-[![codecov](https://codecov.io/gh/FromDoppler/doppler-feature-toggle/branch/main/graph/badge.svg?token=2Wj9lHkIfO)](https://codecov.io/gh/FromDoppler/doppler-feature-toggle)
+[![codecov](https://codecov.io/gh/FromDoppler/doppler-feature-toggle/graph/badge.svg?token=ZpCHpYSkgq)](https://codecov.io/gh/FromDoppler/doppler-feature-toggle)
 
 Simple Feature Toggle client for .NET.
 
