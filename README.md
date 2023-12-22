@@ -9,21 +9,23 @@ Simple Feature Toggle client for .NET.
 
 ## NuGet feed
 
-`NuGet.config` file example:
+[`NuGet.config` file example:](https://github.com/FromDoppler/.github/blob/main/dotnet-examples/nuget.config)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
-	<packageSources>
-		<!--To inherit the global NuGet package sources remove the <clear/> line below -->
-		<add key="github-fromdoppler" value="https://nuget.pkg.github.com/FromDoppler/index.json" />
-	</packageSources>
-	<packageSourceCredentials>
-		<github-fromdoppler>
-			<add key="Username" value="readonly" />
-			<add key="ClearTextPassword" value="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" />
-		</github-fromdoppler>
-	</packageSourceCredentials>
+  <packageSources>
+    <!--To inherit the global NuGet package sources remove the <clear/> line below -->
+    <clear />
+    <add key="nuget" value="https://api.nuget.org/v3/index.json" />
+    <add key="fromdoppler-github-packages" value="https://nuget.pkg.github.com/FromDoppler/index.json" />
+  </packageSources>
+  <packageSourceCredentials>
+    <fromdoppler-github-packages>
+      <add key="Username" value="readonly" />
+      <add key="ClearTextPassword" value="%FROMDOPPLER_GITHUB_PACKAGES_TOKEN%" />
+    </github-fromdoppler>
+  </fromdoppler-github-packages>
 </configuration>
 ```
 
